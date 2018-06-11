@@ -1,14 +1,17 @@
 <template>
     <x-header :left-options="{showBack: false}" id="xHeader">
-        <p v-if="!userLoginInfo">
+        <p v-if="!userLoginToken">
             <router-link to="/login" exact>
                 <img src="../../../static/images/mine.png">
                 <span>登录/注册</span>
             </router-link>
             
         </p>
-        <p v-if="userLoginInfo">
-            个人中心
+        <p v-if="userLoginToken">
+          <router-link to="/home" exact>
+            <img src="../../../static/images/mine.png">
+            <span>个人中心</span>
+          </router-link>
         </p>
         {{title}}
     </x-header>
@@ -34,7 +37,7 @@ export default {
       XHeader
   },
   computed:{
-    ...mapGetters(['userLoginInfo']),
+    ...mapGetters(['userLoginToken']),
   },
   methods:{
     ...mapMutations(['USER_SIGNIN']),
@@ -51,6 +54,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  #xHeader{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    background:#333333;
+  }
     #xHeader p a{
         position: absolute;
         left: 10px;

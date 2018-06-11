@@ -20,7 +20,7 @@ const restApi = (() => {
             url:'/1/auth/is-logged-in'
         },
         //商品列表
-        sellList:{
+        goodsList:{
             url:'/1/sell/list'
         },
         //获奖者

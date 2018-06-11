@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <pub-header :title="headerTitle" v-if="showHeader"></pub-header>
-    <router-view></router-view>
+    <pub-nav v-if="showNav"></pub-nav>
+    <router-view ></router-view>
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import {
     mapActions
   } from 'vuex'
 import pubHeader from "@/components/public/header"
+import pubNav from "@/components/public/nav"
 export default {
   name: 'app',
   data(){
@@ -22,10 +24,11 @@ export default {
     }
   },
   components:{
-    pubHeader
+    pubHeader,
+    pubNav
   },
   computed:{
-    ...mapGetters(['userLoginInfo']),
+    ...mapGetters(['userLoginToken']),
     headerTitle(){
       return  window.document.title
     }
@@ -65,4 +68,117 @@ export default {
 body {
   background-color: #fbf9fe;
 }
+
+  [v-cloak] {
+        display: none
+    }
+    /* zteict reset css v2.0 | 20120626 */
+    
+    html,
+    body,
+    div,
+    span,
+    input,
+    textarea,
+    applet,
+    object,
+    iframe,
+    p,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    caption,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: inherit;
+        vertical-align: baseline;
+        box-sizing: border-box;
+    }
+    /* HTML5 display-role reset for older browsers */
+
+    table,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td{
+        margin: 0;
+        padding: 0;
+        font-size: inherit;
+        vertical-align: baseline;
+        box-sizing: border-box;
+    }
+    
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+    ul li ,ol li {
+      list-style: none;
+    }
 </style>
