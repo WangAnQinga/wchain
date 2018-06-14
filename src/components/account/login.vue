@@ -3,7 +3,7 @@
       <h1>赢夺宝</h1>
       <p>全球首家区块链夺宝平台</p>
       <div class="content"> 
-          <x-input title="手机号码:" name="username" placeholder="请输入手机号码" is-type="china-name" type="text" v-model="username"></x-input>
+          <x-input title="手机号码:" name="username" placeholder="请输入手机号码" type="text" v-model="username"></x-input>
           <x-input title="密码:" name="password" placeholder="请输入密码" type="password" v-model="password"></x-input>
           <x-button mini plain  @click.native="clickLogin() " class="flex-demo"> 登录</x-button>
           <p>
@@ -50,7 +50,9 @@ export default {
         this.userLogin(params).then(res => {
             if(res.data.code == 200){
               this.USER_SIGNIN(res.data.session);
-              this.$router.push('/')
+              this.$router.push('/home')
+            }else{
+              this.$vux.toast.text(res.data.msg.zh, 'top');
             }
         })
     }
@@ -91,9 +93,9 @@ export default {
     font-size:16px;
     border:1px solid #333333;
     padding:0 5px;
-    height:50px;
-    line-height: 50px;
-    margin-bottom:20px;
+    height:40px;
+    line-height: 40px;
+    margin-bottom:15px;
     border-radius:3px;
   }
   #login .content .weui-btn {

@@ -2,7 +2,7 @@
   <div id="navv">
     <ul>
       <router-link to="/home" tag="li" active-class="u-link--Active" exat>首页</router-link>
-      <router-link to="/2" tag="li" active-class="u-link--Active" exat>所有夺宝</router-link>
+      <router-link to="/sell" tag="li" active-class="u-link--Active" exat>所有夺宝</router-link>
       <router-link to="/3" tag="li" active-class="u-link--Active" exat>开奖记录</router-link>
       <router-link to="/invite" tag="li" active-class="u-link--Active" exat>邀请有奖</router-link>
       <router-link to="/guide" tag="li" active-class="u-link--Active" exat>新手指南</router-link>
@@ -27,7 +27,10 @@ export default {
     height: 35px;
     width: 100%;
     background:#666666;
-    margin-top:45px;
+    top:45px;
+    position: fixed;
+    left:0;
+    z-index:99
   }
   #navv ul {
     width:100%;

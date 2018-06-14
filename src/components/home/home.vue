@@ -1,43 +1,12 @@
 <template>
   <div class="home">
+    <scroller use-pullup :pullup-config="pullupDefaultConfig" @on-pullup-loading="loadMore" use-pulldown :pulldown-config="pulldownDefaultConfig" @on-pulldown-loading="refresh" lock-x ref="scrollerBottom" height="-48">
     <swiper></swiper>
     <p class="notice"><img src="../../assets/voice.png"><span>公告：5月18日 上线WICC充值提现及夺宝奖品</span></p>
-    <div class="items">
-      <p class="itemTitle">
-       <span class="title">最新开奖</span>
-        <span class="more">更多··· </span>
-      </p>
-      <div class="itemList">
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-      </div>
-    </div>
-
-    <div class="items">
-      <p class="itemTitle">
-       <span class="title">最新开奖</span>
-        <span class="more">更多··· </span>
-      </p>
-      <div class="itemList">
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-      </div>
-    </div>
-
-
-    <div class="items">
-      <p class="itemTitle">
-       <span class="title">最新开奖</span>
-        <span class="more">更多··· </span>
-      </p>
-      <div class="itemList">
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-      </div>
-    </div>
+    <winner></winner>
+    <near-close></near-close>
+    <newgoods></newgoods>
+    </scroller>
   </div>
 </template>
 
@@ -49,32 +18,65 @@ import {
     mapActions
   } from 'vuex'
 import swiper from './swiper'
+import winner from './winner'
+import nearClose from './nearclose'
+import newgoods from './newgoods'
+import {Scroller} from 'vux'
 export default {
   name: 'home',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      pulldownDefaultConfig:{
+        content: '下拉刷新',
+        height: 40,
+        autoRefresh: false,
+        downContent: '下拉刷新',
+        upContent: '释放后刷新',
+        loadingContent: '正在刷新...',
+        clsPrefix: 'xs-plugin-pulldown-'
+      },
+      pullupDefaultConfig:{
+        content: '上拉加载更多',
+        pullUpHeight: 60,
+        height: 40,
+        autoRefresh: false,
+        downContent: '释放后加载',
+        upContent: '上拉加载更多',
+        loadingContent: '加载中...',
+        clsPrefix: 'xs-plugin-pullup-'
+      }
       
     }
   },
   components:{
-    swiper
+    swiper,
+    newgoods,
+    nearClose,
+    winner,
+    Scroller
   },
   computed:{
     ...mapGetters(['userLoginToken']),
   },
   methods:{
-    getList(){
-      API.get(API.goodsList.url,{},{}).then(res => {
-        console.log(res)
-      })
+    refresh() {
+      
+        this.$refs.scrollerBottom.enablePullup()
+        this.$refs.scrollerBottom.donePulldown()
+    
+    },
+    loadMore() {
+      // this.$refs.scrollerBottom.disablePullup()
+      this.$refs.scrollerBottom.donePullup()
+      
     }
   },
   created(){
 
   },
   mounted(){
-    this.getList();
+    
   }
 }
 </script>
@@ -94,31 +96,5 @@ export default {
     height: 16px;
     margin-right: 5px;
   }
-  .items .itemTitle {
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background:#666666;
-    padding:0 10px;
-    color: #fff;
-  }
-  .itemTitle span.more{
-    float: right;
-  }
-  .itemList{
-    width:100%;
-    display: flex;
-    flex-flow: row nowrap;
-    height: 100px;
-    width: 100%;
-  }
-  .itemList .item{
-    flex:1
-  }
-  .itemList .item{
-    border-right: 2px solid #333
-  }
-  .itemList .item:nth-child(3){
-    border:none
-  }
+
 </style>

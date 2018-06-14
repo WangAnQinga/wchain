@@ -62,6 +62,7 @@ export default {
     height: 45px;
     line-height: 45px;
     background:#333333;
+    z-index:99
   }
     #xHeader p a{
         position: absolute;

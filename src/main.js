@@ -19,9 +19,9 @@ Vue.http.options.headers = {
   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
 };
 
-import { Toast } from 'vux'
+import  { ToastPlugin } from 'vux'
+Vue.use(ToastPlugin)
 
-Vue.component('toast', Toast)
 
 
 FastClick.attach(document.body)

@@ -11,6 +11,18 @@ const restApi = (() => {
         login: {
             url: '/1/auth/login',
         },
+        //发送验证码
+        sendCode:{
+          url:'/1/register/new-captcha'
+        },
+        //注册
+        register:{
+          url:"/1/register/add"
+        },
+        //找回密码
+        findpwd:{
+          url:'/1/register/reset-password'
+        },
         //退出登陆
         logout: {
             url: '/1/auth/logout',
@@ -19,13 +31,17 @@ const restApi = (() => {
         isLogin:{
             url:'/1/auth/is-logged-in'
         },
-        //商品列表
-        goodsList:{
+        //即将开奖
+        nearClose:{
+          url:"/1/sell/near-close"
+        },
+        //最新上架
+        newsgoods:{
             url:'/1/sell/list'
         },
-        //获奖者
-        winner:{
-            url:'/1/sell/winner'
+        //最新开奖
+        winners:{
+            url:'/1/sell/winners'
         },
         get(api_url, urlParams, success){
             return ajax.get(makeApiUrl(api_url, urlParams))

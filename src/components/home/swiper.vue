@@ -1,6 +1,6 @@
 <template>
   <div class="swiperContent">
-    <swiper loop auto>
+    <swiper loop auto height="4rem">
       <swiper-item class="swiper-demo-img" v-for="(item, index) in list" :key="index">
         <img :src="item.img">
       </swiper-item>
@@ -71,9 +71,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .swiperContent{
-  height: 170px;
+  height: 150px;
 }
 .swiperContent .vux-slider{
   height: 100%;
+}
+
+.swiperContent .vux-slider .vux-swiper img{
+  width:100%;
+  height:100%;
 }
 </style>

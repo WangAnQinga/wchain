@@ -2,7 +2,12 @@
   <div id="app">
     <pub-header :title="headerTitle" v-if="showHeader"></pub-header>
     <pub-nav v-if="showNav"></pub-nav>
-    <router-view ></router-view>
+    <div id="content">
+      <keep-alive>
+        <router-view ></router-view>
+      </keep-alive>
+    </div>
+    
   </div>
 </template>
 
@@ -180,5 +185,14 @@ body {
     }
     ul li ,ol li {
       list-style: none;
+    }
+
+    #app{
+      width: 100%;
+      max-width: 500px;
+      margin:auto;
+    }
+    #content{
+      padding-top:80px;
     }
 </style>

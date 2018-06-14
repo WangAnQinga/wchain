@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/components/home/home'
-import login from '@/components/account/login.vue'
+import login from '@/components/account/login'
+import register from '@/components/account/register'
+import findpwd from '@/components/account/findpwd'
 import invite from '@/components/invite/invite'
 import guide from '@/components/guide/guideIndex'
+import sell from '@/components/sellList/sell'
 
 Vue.use(Router)
 
@@ -20,6 +23,16 @@ export default new Router({
       component: login
     },
     {
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/findpwd',
+      name: 'findpwd',
+      component: findpwd
+    },
+    {
       path: '/invite',
       name: 'invite',
       component: invite
@@ -28,6 +41,11 @@ export default new Router({
       path: '/guide',
       name: 'guide',
       component: guide
+    },
+    {
+      path: '/sell',
+      name: 'sell',
+      component: sell
     }
   ]
 })
