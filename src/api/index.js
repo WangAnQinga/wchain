@@ -47,6 +47,14 @@ const restApi = (() => {
         goodDetial:{
             url:'/1/sell/detail?id={id}'
         },
+        //购买信息
+        boughtList:{
+            url: '/1/bought/list'
+        },
+        //购买
+        buyGoods:{
+            url:'/1/sell/user-buy'
+        },
         get(api_url, urlParams, success){
             return ajax.get(makeApiUrl(api_url, urlParams))
         },

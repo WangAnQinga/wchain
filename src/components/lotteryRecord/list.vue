@@ -7,7 +7,7 @@
       <div class="item" v-for="(item,index) in items" :key="index">
         <img src="../../assets/bit.jpg" alt="">
         <div class="middle">
-          <p>标题：1BTC 一枚比特币夺宝</p>
+          <p>标题：{{item.description.name}}</p>
           <p><span class="winner">获得者：{{item.winner_username}} </span><span class="total">夺宝：{{item.price}}人次</span></p>
           <p>商品价值：{{item.price}}平台币</p>
           <p>揭晓时间：{{item.updated_at | formDate}}</p>
@@ -44,6 +44,7 @@ export default {
     }
   },
   components:{
+ 
   },
   computed:{
     ...mapGetters(['userLoginToken']),
@@ -118,7 +119,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  height: 100px;
+  height: 120px;
   border-bottom: 1px solid #666
 }
 .item img{

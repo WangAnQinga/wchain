@@ -22,7 +22,8 @@
               </ul>
             </div>
         </div>
-        <button class="buy" :disabled="item.remaining == 0 ? true:false">我要购买</button>
+        <router-link class="buy" :disabled="item.remaining == 0 ? true:false"   tag="button" :to="{name: 'goodsDetail', params: { id: item.id}}">我要购买</router-link>
+
       </div>
       </div>
       </div>
@@ -46,9 +47,10 @@ export default {
     return {
       items: [],
       minirefresh: null,
-      maxDataSize: 30,
+      maxDataSize: 10,
       requestDelayTime: 2000,
       dataStamp: [],
+      lastId:null
     }
   },
   components:{
@@ -60,19 +62,29 @@ export default {
     ...mapMutations(['USER_SIGNIN']),
     ...mapActions(['userLogout', 'userLogin']),
     get_list(){
-      API.get(API.newsgoods.url,{},{}).then(res => {
+      let url = null;
+      if(this.lastId){
+        url = API.newsgoods.url + `?cursor_id=${this.lastId}`;
+      }else{
+        url = API.newsgoods.url
+      }
+      API.get(url,{},{}).then(res => {
         if(res.data.code ==200){
           this.dataStamp =  res.data.data;
+          this.lastId = res.data.data[res.data.data.length -1].id
         }
       })
     },
     downCallback() {
         var self = this;
+        self.lastId = null;
         self.get_list();
         console.log('下拉')
         setTimeout(() =>{
-          self.item = self.dataStamp;
-            self.miniRefresh.endDownLoading(true);
+          self.$nextTick(() => {
+            self.items = self.dataStamp;
+          })
+          self.miniRefresh.endDownLoading(true);
         }, self.requestDelayTime);
     },
     upCallback() {
@@ -81,7 +93,7 @@ export default {
         self.get_list()
         setTimeout(function() {
             self.items = self.items.concat(self.dataStamp);
-            self.miniRefresh.endUpLoading(self.items.length >= self.maxDataSize ? true : false);
+            self.miniRefresh.endUpLoading(self.dataStamp.length < self.maxDataSize ? true : false);
         }, self.requestDelayTime);
     },
   },

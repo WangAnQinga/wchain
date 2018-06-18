@@ -23,7 +23,7 @@
                 <li>剩余</li>
               </ul>
             </div>
-            <button class="buy" :disabled="item.remaining == 0 ? true:false">立即购买</button>
+             <router-link class="buy" :disabled="item.remaining == 0 ? true:false"   tag="button" :to="{name: 'goodsDetail', params: { id: item.id}}">立即购买</router-link>
         </div>
       </div>
     </div>

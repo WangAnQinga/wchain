@@ -14,8 +14,9 @@ import VueResource from 'vue-resource'
 /*使用VueResource插件*/
 Vue.use(VueResource)
 
-import  { ToastPlugin } from 'vux'
-Vue.use(ToastPlugin)
+import  { ToastPlugin,Confirm } from 'vux'
+Vue.use(ToastPlugin);
+Vue.component('confirm', Confirm)
 
 
 
@@ -23,7 +24,7 @@ import VueScroller from 'vue-scroller'
 Vue.use(VueScroller)
 
 
-FastClick.attach(document.body)
+// FastClick.attach(document.body)
 
 window.API = api;
 

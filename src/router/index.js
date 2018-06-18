@@ -9,55 +9,61 @@ import guide from '@/components/guide/guideIndex'
 import sell from '@/components/sellList/sell'
 import lotteryRecord from '@/components/lotteryRecord/list'
 import winnerDetail from '@/components/lotteryRecord/detail'
+import goodsDetail from '@/components/sellList/goodsDetail'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/home',
-      name: 'home',
+      path: "/home",
+      name: "home",
       component: home
     },
     {
-      path: '/login',
-      name: 'login',
+      path: "/login",
+      name: "login",
       component: login
     },
     {
-      path: '/register',
-      name: 'register',
+      path: "/register",
+      name: "register",
       component: register
     },
     {
-      path: '/findpwd',
-      name: 'findpwd',
+      path: "/findpwd",
+      name: "findpwd",
       component: findpwd
     },
     {
-      path: '/invite',
-      name: 'invite',
+      path: "/invite",
+      name: "invite",
       component: invite
     },
     {
-      path: '/guide',
-      name: 'guide',
+      path: "/guide",
+      name: "guide",
       component: guide
     },
     {
-      path: '/sell',
-      name: 'sell',
+      path: "/sell",
+      name: "sell",
       component: sell
     },
     {
-      path: '/winner/list',
-      name: 'lotteryRecord',
+      path: "/winner/list",
+      name: "lotteryRecord",
       component: lotteryRecord
     },
     {
-      path: '/winner/detail/:id',
-      name: 'winnerDetail',
+      path: "/winner/detail/:id",
+      name: "winnerDetail",
       component: winnerDetail
+    },
+    {
+      path: "/goods/detail/:id",
+      name: "goodsDetail",
+      component: goodsDetail
     }
   ]
-})
+});
