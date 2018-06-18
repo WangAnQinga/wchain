@@ -1,5 +1,5 @@
 <template>
-  <div class="sellList">
+  <div class="winnerList">
   <div id="minirefresh" class="minirefresh-wrap">
                 
   <div class="minirefresh-scroll">
@@ -7,22 +7,13 @@
       <div class="item" v-for="(item,index) in items" :key="index">
         <img src="../../assets/bit.jpg" alt="">
         <div class="middle">
-          <h4>标题：1BTC 一枚比特币夺宝</h4>
-           <div class="progress">
-              <span class="bar" id="bar" :style="'width:'+ (item.price - item.remaining)*100/(item.price) + '%'"></span>  
-            </div>
-            <div class="detail">
-              <ul>
-                <li>{{item.price - item.remaining}}</li>
-                <li>{{item.price}}</li>
-                <li>{{ item.remaining}}</li>
-                <li>已参与</li>
-                <li>总人数</li>
-                <li>剩余</li>
-              </ul>
-            </div>
+          <p>标题：1BTC 一枚比特币夺宝</p>
+          <p><span class="winner">获得者：{{item.winner_username}} </span><span class="total">夺宝：{{item.price}}人次</span></p>
+          <p>商品价值：{{item.price}}平台币</p>
+          <p>揭晓时间：{{item.updated_at | formDate}}</p>
+          <p>中奖号码：{{item.calc_result}}</p>
+          <router-link class="moreDetail" :to="{name: 'winnerDetail', params: { id: item.id}}">查看详情</router-link>
         </div>
-        <button class="buy" :disabled="item.remaining == 0 ? true:false">我要购买</button>
       </div>
       </div>
       </div>
@@ -33,6 +24,7 @@
 <script>
 import MiniRefreshTools from 'minirefresh';
 import 'minirefresh/dist/debug/minirefresh.css'
+import moment from 'moment'
 import {
     mapState,
     mapGetters,
@@ -56,11 +48,16 @@ export default {
   computed:{
     ...mapGetters(['userLoginToken']),
   },
+  filters:{
+    formDate(str){
+      return moment(str*1000).format('YYYY-MM-DD HH:mm')
+    }
+  },
   methods:{
     ...mapMutations(['USER_SIGNIN']),
     ...mapActions(['userLogout', 'userLogin']),
     get_list(){
-      API.get(API.newsgoods.url,{},{}).then(res => {
+      API.get(API.winners.url,{},{}).then(res => {
         if(res.data.code ==200){
           this.dataStamp =  res.data.data;
         }
@@ -109,35 +106,40 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .minirefresh-wrap{
-  top:75px
+  top:85px
 }
-.selllist{
+/* .selllist{
   height: 646px;
   overflow-y: scroll
-}
+} */
 .item{
   width: 100%;
-  padding:10px 10px 20px 10px;
+  padding:10px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   height: 100px;
-  border-bottom: 1px dotted #666
+  border-bottom: 1px solid #666
 }
 .item img{
-  width: 70px;
-  height: 70px;
- 
+  width: 90px;
+  height: 90px;
   display: block
 }
 .item .middle{
-  width: 210px;
-  height:70px;
+  width: 280px;
+  height:90px;
+  position: relative;
    margin: 0 5px;
 }
-.middle h4{
-  height: 25px;
-  line-height: 25px;
+.moreDetail{
+  position: absolute;
+  bottom:5px;
+  right:5px;
+  color:skyblue
+}
+.middle .winner{
+  margin-right:20px;
 }
 
 .item button{

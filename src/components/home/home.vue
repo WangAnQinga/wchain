@@ -1,12 +1,14 @@
 <template>
   <div class="home">
-    <scroller use-pullup :pullup-config="pullupDefaultConfig" @on-pullup-loading="loadMore" use-pulldown :pulldown-config="pulldownDefaultConfig" @on-pulldown-loading="refresh" lock-x ref="scrollerBottom" height="-48">
-    <swiper></swiper>
-    <p class="notice"><img src="../../assets/voice.png"><span>公告：5月18日 上线WICC充值提现及夺宝奖品</span></p>
-    <winner></winner>
-    <near-close></near-close>
-    <newgoods></newgoods>
-    </scroller>
+    <div id="minirefresh" class="minirefresh-wrap">     
+      <div class="minirefresh-scroll">
+        <swiper></swiper>
+        <p class="notice"><img src="../../assets/voice.png"><span>公告：5月18日 上线WICC充值提现及夺宝奖品</span></p>
+        <winner></winner>
+        <near-close></near-close>
+        <newgoods></newgoods>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,31 +23,15 @@ import swiper from './swiper'
 import winner from './winner'
 import nearClose from './nearclose'
 import newgoods from './newgoods'
-import {Scroller} from 'vux'
+import MiniRefreshTools from 'minirefresh';
+import 'minirefresh/dist/debug/minirefresh.css'
 export default {
   name: 'home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      pulldownDefaultConfig:{
-        content: '下拉刷新',
-        height: 40,
-        autoRefresh: false,
-        downContent: '下拉刷新',
-        upContent: '释放后刷新',
-        loadingContent: '正在刷新...',
-        clsPrefix: 'xs-plugin-pulldown-'
-      },
-      pullupDefaultConfig:{
-        content: '上拉加载更多',
-        pullUpHeight: 60,
-        height: 40,
-        autoRefresh: false,
-        downContent: '释放后加载',
-        upContent: '上拉加载更多',
-        loadingContent: '加载中...',
-        clsPrefix: 'xs-plugin-pullup-'
-      }
+      minirefresh: null,
+      maxDataSize: 30,
+      requestDelayTime: 600,
       
     }
   },
@@ -54,36 +40,48 @@ export default {
     newgoods,
     nearClose,
     winner,
-    Scroller
   },
   computed:{
     ...mapGetters(['userLoginToken']),
   },
   methods:{
-    refresh() {
-      
-        this.$refs.scrollerBottom.enablePullup()
-        this.$refs.scrollerBottom.donePulldown()
-    
+    downCallback() {
+        var self = this;
+        setTimeout(() =>{
+            self.miniRefresh.endDownLoading(true);
+        }, self.requestDelayTime);
     },
-    loadMore() {
-      // this.$refs.scrollerBottom.disablePullup()
-      this.$refs.scrollerBottom.donePullup()
-      
-    }
+    upCallback() {
+        var self = this;
+        setTimeout(function() {
+            self.miniRefresh.endUpLoading(true);
+        }, self.requestDelayTime);
+    },
   },
   created(){
 
   },
   mounted(){
-    
-  }
+    var self = this;
+    self.miniRefresh = new MiniRefresh({
+      container: '#minirefresh',
+      down: {
+          callback: self.downCallback
+      },
+      isScrollBar:false,
+      up: {
+          isLock:true,
+          isAuto: true,
+          callback: self.upCallback
+      }
+  })
+}
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .notice{
+<style >
+  .home .notice{
     width:100%;
     height: 25px;
     display: flex;
@@ -91,10 +89,17 @@ export default {
     flex-flow: row nowrap;
     align-items: center;
   }
-  .notice img{
+  .home .notice img{
     width: 16px;
     height: 16px;
     margin-right: 5px;
+  }
+
+  .home .minirefresh-wrap{
+    top:75px
+  }
+  .home .minirefresh-theme-default .minirefresh-upwrap {
+    display: none !important;
   }
 
 </style>

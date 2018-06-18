@@ -7,7 +7,8 @@
       <div class="itemList">
         <div class="item" v-for="(item,index) in items" :key="index">
               <h4> 1BTC</h4>
-              <p>价值{{item.price}}</p>
+              <!-- <p>价值{{item.price}}</p> -->
+              <p>恭喜{{item.winner_username}}获得</p>
         </div>
       </div>
     </div>
@@ -38,9 +39,9 @@ export default {
     ...mapMutations(['USER_SIGNIN']),
     ...mapActions(['userLogout', 'userLogin']),
     get_list(){
-      API.get(API.nearClose.url,{},{}).then(res => {
+      API.get(API.winners.url,{},{}).then(res => {
         if(res.data.code ==200){
-          this.items = res.data.data
+          this.items = res.data.data.slice(0,3)
         }
       })
     }

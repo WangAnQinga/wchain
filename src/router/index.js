@@ -7,6 +7,8 @@ import findpwd from '@/components/account/findpwd'
 import invite from '@/components/invite/invite'
 import guide from '@/components/guide/guideIndex'
 import sell from '@/components/sellList/sell'
+import lotteryRecord from '@/components/lotteryRecord/list'
+import winnerDetail from '@/components/lotteryRecord/detail'
 
 Vue.use(Router)
 
@@ -46,6 +48,16 @@ export default new Router({
       path: '/sell',
       name: 'sell',
       component: sell
+    },
+    {
+      path: '/winner/list',
+      name: 'lotteryRecord',
+      component: lotteryRecord
+    },
+    {
+      path: '/winner/detail/:id',
+      name: 'winnerDetail',
+      component: winnerDetail
     }
   ]
 })

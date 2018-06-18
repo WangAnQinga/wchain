@@ -43,6 +43,10 @@ const restApi = (() => {
         winners:{
             url:'/1/sell/winners'
         },
+        //商品信息
+        goodDetial:{
+            url:'/1/sell/detail?id={id}'
+        },
         get(api_url, urlParams, success){
             return ajax.get(makeApiUrl(api_url, urlParams))
         },

@@ -14,14 +14,13 @@ import VueResource from 'vue-resource'
 /*使用VueResource插件*/
 Vue.use(VueResource)
 
-Vue.http.options.emulateJSON = true;
-Vue.http.options.headers = {
-  'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-};
-
 import  { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)
 
+
+
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
 
 
 FastClick.attach(document.body)

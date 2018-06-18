@@ -3,7 +3,7 @@
     <ul>
       <router-link to="/home" tag="li" active-class="u-link--Active" exat>首页</router-link>
       <router-link to="/sell" tag="li" active-class="u-link--Active" exat>所有夺宝</router-link>
-      <router-link to="/3" tag="li" active-class="u-link--Active" exat>开奖记录</router-link>
+      <router-link to="/winner/list" tag="li" active-class="u-link--Active" exat>开奖记录</router-link>
       <router-link to="/invite" tag="li" active-class="u-link--Active" exat>邀请有奖</router-link>
       <router-link to="/guide" tag="li" active-class="u-link--Active" exat>新手指南</router-link>
     </ul>
